@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:submision_ahmadmuji/ui/pages/sign_in.dart';
+import 'package:submision_ahmadmuji/ui/style/style.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -19,23 +20,28 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 220,
-                width: 200,
-                padding: EdgeInsets.only(bottom: 50),
-                child: Lottie.asset('images/logo.json'),
+                width: MediaQuery.of(context).size.width * 0.4,
+                margin: EdgeInsets.only(bottom: 24),
+                child: Lottie.asset(
+                  'images/logo.json',
+                ),
               ),
               Container(
                   width: 290,
-                  margin: EdgeInsets.only(bottom: 20),
+                  margin: EdgeInsets.only(
+                    bottom: 16,
+                  ),
                   child: Text(
                     'New Experience',
                     style: GoogleFonts.poppins(
-                        fontSize: 24, fontWeight: FontWeight.w600),
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                    ),
                     textAlign: TextAlign.center,
                   )),
               Container(
                   width: 260,
-                  margin: EdgeInsets.only(bottom: 60),
+                  margin: EdgeInsets.only(bottom: 24),
                   child: Text(
                     'Order a Food much easier than any before',
                     style: GoogleFonts.poppins(fontSize: 20),
@@ -46,18 +52,23 @@ class _SplashScreenState extends State<SplashScreen> {
                 width: 250,
                 padding: EdgeInsets.only(),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    primary: colorPrimary,
+                  ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return SignInPage();
-                    }));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignInPage(),
+                      ),
+                    );
                   },
                   child: Text(
                     'Get Started',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
+                    style: fontButtonText,
                   ),
                 ),
               ),

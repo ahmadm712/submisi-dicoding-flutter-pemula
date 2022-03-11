@@ -20,7 +20,7 @@ class Food {
   });
 }
 
-var foodList = [
+List<Food> foodList = [
   Food(
     name: 'Nasi Tutug Oncom',
     description:

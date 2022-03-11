@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:submision_ahmadmuji/models/cart.dart';
 import 'package:submision_ahmadmuji/ui/pages/food_order.dart';
+import 'package:submision_ahmadmuji/ui/style/style.dart';
 
 class FoodBucketScreen extends StatefulWidget {
   @override
@@ -7,15 +9,6 @@ class FoodBucketScreen extends StatefulWidget {
 }
 
 class _FoodBucketScreenState extends State<FoodBucketScreen> {
-  final fontStylefoodprice =
-      TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
-  final fontStylefoodpricetotal =
-      TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.green);
-
-  final fontStylefoodname =
-      TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-  final fontStylefoodnamea =
-      TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
   int _foodItemsa = 1;
   int _foodItemsb = 1;
   int _foodPricea = 10000;
@@ -27,390 +20,375 @@ class _FoodBucketScreenState extends State<FoodBucketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-                padding: EdgeInsets.all(20),
-                width: MediaQuery.of(context).size.width,
-                height: 110,
-                decoration: BoxDecoration(
-                    color: Colors.white60,
-                    border: Border.all(color: Colors.white70)),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Food Bucket',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Lets finish your order before it runs out',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ])),
-            SizedBox(
-              height: 10,
+      body: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              top: 24,
             ),
-            Container(
+          ),
+          Container(
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(20),
-              height: 320,
               decoration: BoxDecoration(
                   color: Colors.white60,
                   border: Border.all(color: Colors.white70)),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+              child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.arrow_back,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            Center(
+                              child: Text(
+                                'Cart',
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
-                          'Food Ordered',
+                          'Lets finish your order before it runs out',
                           style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Stack(children: [
-                        Image.asset(
-                          'images/seblak.jpg',
-                          height: 100,
-                          width: 100,
-                        ),
-                      ]),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Seblak',
-                            style: fontStylefoodname,
-                          ),
-                          Text(
-                            '10.000',
-                            style: fontStylefoodprice,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Row(
-                          children: [
-                            Text(
-                              '$_foodItemsa',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'Items',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              child: Column(
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        _incrementCountera();
-                                      },
-                                      icon: Icon(Icons.add)),
-                                  IconButton(
-                                      onPressed: () {
-                                        _decrementCountera();
-                                      },
-                                      icon: Icon(Icons.minimize)),
-                                ],
+                  ])),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: Colors.white60,
+              border: Border.all(
+                color: Colors.white70,
+              ),
+            ),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    child: ListView.builder(
+                        itemCount: cart.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(bottom: 16),
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: colorPrimary.withOpacity(0.2),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ]),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Stack(children: [
-                              Image.asset(
-                                'images/surabi.jpg',
-                                height: 100,
-                                width: 100,
-                              ),
-                            ]),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Surabi',
-                                  style: fontStylefoodname,
-                                ),
-                                Text(
-                                  '4.000',
-                                  style: fontStylefoodprice,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 1,
+                                  spreadRadius: 1,
+                                  color: Colors.grey.withOpacity(0.045),
                                 )
                               ],
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Row(
+                            child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    '$_foodItemsb',
-                                    style: fontStylefoodprice,
+                                  Container(
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          child: Image.asset(
+                                            '${cart[index].imageAsset}',
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${cart[index].name}',
+                                              style: fontStylefoodname,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.fade,
+                                            ),
+                                            Text(
+                                              '${cart[index].foodPrice}',
+                                              style: fontStylefoodprice,
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '$_foodItemsa',
+                                                  style: fontStylefoodprice,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'Items',
+                                                  style: fontStylefoodprice,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
-                                    width: 5,
+                                    width: 16,
                                   ),
-                                  Text(
-                                    'Items',
-                                    style: fontStylefoodprice,
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        IconButton(
+                                            onPressed: () {
+                                              _incrementCounter();
+                                            },
+                                            icon: Icon(Icons.add)),
+                                        IconButton(
+                                            onPressed: () {
+                                              _decrementCounter();
+                                            },
+                                            icon: Icon(Icons.minimize)),
+                                      ],
+                                    ),
                                   ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Column(
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            _incrementCounterb();
-                                          },
-                                          icon: Icon(Icons.add)),
-                                      IconButton(
-                                          onPressed: () {
-                                            _decrementCounterb();
-                                          },
-                                          icon: Icon(Icons.minimize)),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ]),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ]),
-            ),
-
-            //start of detail transaksi
-
-            Container(
-              padding: EdgeInsets.all(20),
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Colors.white60,
-                  border: Border.all(color: Colors.white70)),
-              child: Column(
-                children: [
-                  //start food a
-                  Row(
-                    children: [
-                      Text(
-                        'Detail Transactions',
-                        style: fontStylefoodname,
-                      ),
-                    ],
+                                ]),
+                          );
+                        }),
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Stack(children: [
-                          Text(
-                            'Seblak',
-                            style: fontStylefoodnamea,
-                          )
-                        ]),
-                        Row(
-                          children: [
-                            Text(
-                              'IDR',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '$_foodPricea',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        ),
+                ]),
+          ),
+
+          ///start of detail transaksi
+
+          Container(
+            padding: EdgeInsets.all(20),
+            height: 200,
+            decoration: BoxDecoration(
+                color: Colors.white60,
+                border: Border.all(color: Colors.white70)),
+            child: Column(
+              children: [
+                ///start food a
+                Row(
+                  children: [
+                    Text(
+                      'Detail Transactions',
+                      style: fontStylefoodname,
+                    ),
+                  ],
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Stack(children: [
+                        Text(
+                          'Seblak',
+                          style: fontStylefoodnamea,
+                        )
                       ]),
-                  //end food a
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Stack(children: [
+                      Row(
+                        children: [
                           Text(
-                            'Surabi',
-                            style: fontStylefoodnamea,
-                          )
-                        ]),
-                        Row(
-                          children: [
-                            Text(
-                              'IDR',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '$_foodPriceb',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        ),
-                      ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Stack(children: [
+                            'IDR',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
                           Text(
-                            'Tax',
-                            style: fontStylefoodnamea,
-                          )
-                        ]),
-                        Row(
-                          children: [
-                            Text(
-                              'IDR',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '$_tax',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        ),
+                            '$_foodPricea',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ]),
+
+                ///end food a
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Stack(children: [
+                        Text(
+                          'Surabi',
+                          style: fontStylefoodnamea,
+                        )
                       ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Stack(children: [
+                      Row(
+                        children: [
                           Text(
-                            'Driver Service',
-                            style: fontStylefoodnamea,
-                          )
-                        ]),
-                        Row(
-                          children: [
-                            Text(
-                              'IDR',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '$_driver',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        ),
-                      ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Stack(children: [
+                            'IDR',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
                           Text(
-                            'Total Price',
-                            style: fontStylefoodnamea,
-                          )
-                        ]),
-                        Row(
-                          children: [
-                            Text(
-                              'IDR',
-                              style: fontStylefoodprice,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '$_totalprice',
-                              style: fontStylefoodpricetotal,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        ),
+                            '$_foodPriceb',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Stack(children: [
+                        Text(
+                          'Tax',
+                          style: fontStylefoodnamea,
+                        )
                       ]),
-                ],
+                      Row(
+                        children: [
+                          Text(
+                            'IDR',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '$_tax',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Stack(children: [
+                        Text(
+                          'Driver Service',
+                          style: fontStylefoodnamea,
+                        )
+                      ]),
+                      Row(
+                        children: [
+                          Text(
+                            'IDR',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '$_driver',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Stack(children: [
+                        Text(
+                          'Total Price',
+                          style: fontStylefoodnamea,
+                        )
+                      ]),
+                      Row(
+                        children: [
+                          Text(
+                            'IDR',
+                            style: fontStylefoodprice,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '$_totalprice',
+                            style: fontStylefoodpricetotal,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ]),
+              ],
+            ),
+          ),
+          Container(
+            height: 46,
+            width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.only(top: 40, bottom: 40),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: colorPrimary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  )),
+              onPressed: () {
+                showAlertDialog(context);
+                setState(() {
+                  cart.clear();
+                });
+              },
+              child: Text(
+                'Check Out Now',
+                style: fontButtonText,
               ),
             ),
-
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  showAlertDialog(context);
-                },
-                child: Text(
-                  'Check Out Now',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  void _incrementCountera() {
+  void _incrementCounter() {
     setState(() {
       _foodItemsa++;
       _foodPricea = _foodPricea * _foodItemsa;
@@ -418,7 +396,7 @@ class _FoodBucketScreenState extends State<FoodBucketScreen> {
     });
   }
 
-  void _decrementCountera() {
+  void _decrementCounter() {
     setState(() {
       _foodItemsa--;
       _foodPricea = _foodPricea * _foodItemsa;
@@ -441,11 +419,14 @@ class _FoodBucketScreenState extends State<FoodBucketScreen> {
   }
 
   showAlertDialog(BuildContext context) {
-    // set up the buttons
-
+    /// set up the buttons
     Widget continueButton = ElevatedButton(
       child: Text("Continue"),
-      style: ElevatedButton.styleFrom(primary: Colors.green),
+      style: ElevatedButton.styleFrom(
+          primary: colorPrimary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          )),
       onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return FoodOrder();
@@ -453,7 +434,7 @@ class _FoodBucketScreenState extends State<FoodBucketScreen> {
       },
     );
 
-    // set up the AlertDialog
+    /// set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Transactions Succes"),
       actions: [
@@ -461,7 +442,7 @@ class _FoodBucketScreenState extends State<FoodBucketScreen> {
       ],
     );
 
-    // show the dialog
+    /// show the dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {

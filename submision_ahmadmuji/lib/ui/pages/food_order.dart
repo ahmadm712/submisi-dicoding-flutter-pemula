@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:submision_ahmadmuji/ui/style/style.dart';
 
 class FoodOrder extends StatelessWidget {
-  final fontStylefoodprice =
-      TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
-  final fontStylefoodname =
-      TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-  final fontStylefoodnamea =
-      TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
-  final fontStylefoodnameb = TextStyle(
-      fontSize: 16, fontWeight: FontWeight.bold, color: Colors.orangeAccent);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,21 +18,23 @@ class FoodOrder extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text(
-                            'Order Status',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                          IconButton(
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Wait For the best food',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                          Center(
+                            child: Text(
+                              'Order Status',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ],
                       ),
@@ -90,7 +85,7 @@ class FoodOrder extends StatelessWidget {
                           ),
                           Text(
                             'In Progress',
-                            style: fontStylefoodnameb,
+                            style: fontStylefoodnamea,
                           ),
                           Row(
                             children: [
@@ -141,7 +136,7 @@ class FoodOrder extends StatelessWidget {
                           ),
                           Text(
                             'In Progress',
-                            style: fontStylefoodnameb,
+                            style: fontStylefoodnamea,
                           ),
                           Row(
                             children: [
@@ -174,7 +169,7 @@ class FoodOrder extends StatelessWidget {
                     ),
                     Center(
                       child: FloatingActionButton(
-                        backgroundColor: Colors.red,
+                        backgroundColor: colorPrimary,
                         onPressed: () {
                           Navigator.pop(context);
                         },

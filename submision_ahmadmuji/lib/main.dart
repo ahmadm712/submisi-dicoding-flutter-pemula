@@ -12,12 +12,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.deepPurple,
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
-      home: SplashScreen(),
+      routes: {
+        '/': (context) => SplashScreen(),
+      },
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:submision_ahmadmuji/ui/pages/home_screen.dart';
 import 'package:submision_ahmadmuji/ui/pages/profil.dart';
 import 'package:submision_ahmadmuji/ui/pages/food_bucket.dart';
+import 'package:submision_ahmadmuji/ui/style/style.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,94 +29,78 @@ class _HomePageState extends State<HomePage> {
   BottomAppBar bottomNavBar() {
     return BottomAppBar(
       shape: CircularNotchedRectangle(),
-      notchMargin: 10,
+      notchMargin: 8,
       child: Container(
         height: 60,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      currentScreen = HomeScreen();
-                      currentTab = 0;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: currentTab == 0
-                            ? Colors.cyan.shade700
-                            : Colors.grey,
-                        size: 30,
-                      ),
-                      Text(
-                        'Home',
-                        style: TextStyle(
-                            color: currentTab == 0
-                                ? Colors.cyan.shade700
-                                : Colors.grey),
-                      ),
-                    ],
+            MaterialButton(
+              onPressed: () {
+                setState(() {
+                  currentScreen = HomeScreen();
+                  currentTab = 0;
+                });
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.home_outlined,
+                    color: currentTab == 0 ? colorPrimary : Colors.grey,
+                    size: 30,
                   ),
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      currentScreen = FoodBucketScreen();
-                      currentTab = 1;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.shopping_basket,
-                          color: currentTab == 1
-                              ? Colors.cyan.shade700
-                              : Colors.grey,
-                          size: 30),
-                      Text(
-                        'Food Bucket',
-                        style: TextStyle(
-                            color: currentTab == 1
-                                ? Colors.cyan.shade700
-                                : Colors.grey),
-                      ),
-                    ],
+                  Text(
+                    'Home',
+                    style: TextStyle(
+                        color: currentTab == 0 ? colorPrimary : Colors.grey),
                   ),
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      currentScreen = ProfilScreen();
-                      currentTab = 2;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.person,
-                          color: currentTab == 2
-                              ? Colors.cyan.shade700
-                              : Colors.grey,
-                          size: 30),
-                      Text(
-                        'Profil',
-                        style: TextStyle(
-                            color: currentTab == 2
-                                ? Colors.cyan.shade700
-                                : Colors.grey),
-                      ),
-                    ],
+                ],
+              ),
+            ),
+            MaterialButton(
+              onPressed: () {
+                setState(() {
+                  currentScreen = FoodBucketScreen();
+                  currentTab = 1;
+                });
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.shopping_cart_outlined,
+                      color: currentTab == 1 ? colorPrimary : Colors.grey,
+                      size: 30),
+                  Text(
+                    'Cart',
+                    style: TextStyle(
+                        color: currentTab == 1 ? colorPrimary : Colors.grey),
                   ),
-                ),
-              ],
-            )
+                ],
+              ),
+            ),
+            MaterialButton(
+              onPressed: () {
+                setState(() {
+                  currentScreen = ProfilScreen();
+                  currentTab = 2;
+                });
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.person_outline,
+                      color: currentTab == 2 ? colorPrimary : Colors.grey,
+                      size: 30),
+                  Text(
+                    'Profil',
+                    style: TextStyle(
+                        color: currentTab == 2 ? colorPrimary : Colors.grey),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

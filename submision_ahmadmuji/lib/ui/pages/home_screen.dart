@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:submision_ahmadmuji/models/detail_screen.dart';
+import 'package:submision_ahmadmuji/ui/pages/detail_screen.dart';
 import 'package:submision_ahmadmuji/models/food.dart';
+import 'package:submision_ahmadmuji/ui/pages/profil.dart';
+import 'package:submision_ahmadmuji/ui/style/style.dart';
+import 'package:submision_ahmadmuji/ui/widget/food_card.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,181 +11,293 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final fontStyleB =
-      TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black);
+  TextEditingController textEditController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding:
-                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'FOOD MARKET',
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w500),
-                        ),
-                        Text('Let Get Some Food'),
-                      ],
-                    ),
-                    Container(
-                        height: 50,
-                        width: 50,
-                        child: Image.asset('images/logo.png'))
-                  ],
-                ),
-              ),
-              // start on popular food
-              Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  'Some Popular Food on this Week',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 220,
-                child: FoodCardX(),
-              ),
-              // end on popular food
-              SizedBox(
-                height: 10,
-              ),
-              //start on category
-              Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Category',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            OutlinedButton(
-                              onPressed: () {},
-                              child: Text(
-                                'All',
-                                style: fontStyleB,
-                              ),
-                            ),
-                            OutlinedButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Fast Food',
-                                style: fontStyleB,
-                              ),
-                            ),
-                            OutlinedButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Soup',
-                                style: fontStyleB,
-                              ),
-                            ),
-                            OutlinedButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Healty Food',
-                                style: fontStyleB,
-                              ),
-                            ),
-                          ]),
-                    ]),
-              ),
-
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 220,
-                child: FoodCardX(),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  'Some Best Selling Food',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 220,
-                child: FoodCardX(),
-              ),
-
-              //end of category
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class FoodCardX extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        final Food food = foodList[index];
-
-        return InkWell(
-          child: Card(
-            child: Container(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: Column(
+      body: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return DetailScreen(
-                                  food: food,
-                                );
-                              }));
-                            },
-                            child: Expanded(
-                              child: Image.asset(
-                                food.imageAsset,
-                                width: 150,
-                                height: 155,
-                              ),
-                            ))),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Text(
-                      food.name,
+                      'FOOD MARKET',
                       style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
                     ),
-                    Image.asset('images/stars_4.7.png'),
-                  ]),
+                    Text('Let Get Some Food'),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfilScreen(),
+                        ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey.withOpacity(0.2),
+                    ),
+                    padding: EdgeInsets.all(4),
+                    child: Image.asset(
+                      'images/ahmad_img.png',
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
-        );
-      },
-      itemCount: foodList.length,
+          // start on popular food
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 50,
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                      color: colorTextFieldChat.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: TextField(
+                    controller: textEditController,
+                    onChanged: (value) {},
+                    onSubmitted: (value) {},
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      icon: Icon(
+                        Icons.search,
+                        size: 17,
+                      ),
+                      hintText: 'Cari',
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Text(
+            'Today Offers',
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 8, bottom: 8),
+            width: double.infinity,
+            height: 170,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: foodList.length,
+              itemBuilder: (context, index) {
+                Food food = foodList[index];
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(food: food),
+                      )),
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    width: 166,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.2),
+                          )
+                        ]),
+                    margin: EdgeInsets.only(right: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            food.imageAsset,
+                            height: 100,
+                            width: 166,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Text(
+                          food.name,
+                          style: fontStylefoodnamea,
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          food.foodPrice,
+                          style: fontStylefoodprice,
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          // end on popular food
+          SizedBox(
+            height: 8,
+          ),
+
+          Text(
+            'Promo',
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 8, bottom: 8),
+            width: double.infinity,
+            height: 170,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: foodList.length,
+              itemBuilder: (context, index) {
+                Food food = foodList[index];
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(food: food),
+                      )),
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    width: 166,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.2),
+                          )
+                        ]),
+                    margin: EdgeInsets.only(right: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            food.imageAsset,
+                            height: 100,
+                            width: 166,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Text(
+                          food.name,
+                          style: fontStylefoodnamea,
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          food.foodPrice,
+                          style: fontStylefoodprice,
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          // end on popular food
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            'Best Seller',
+            style: TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 8, bottom: 8),
+            width: double.infinity,
+            height: 170,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: foodList.length,
+              itemBuilder: (context, index) {
+                Food food = foodList[index];
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(food: food),
+                      )),
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    width: 166,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            color: Colors.black.withOpacity(0.2),
+                          )
+                        ]),
+                    margin: EdgeInsets.only(right: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            food.imageAsset,
+                            height: 100,
+                            width: 166,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Text(
+                          food.name,
+                          style: fontStylefoodnamea,
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          food.foodPrice,
+                          style: fontStylefoodprice,
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
