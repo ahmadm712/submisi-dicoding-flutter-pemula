@@ -2,70 +2,69 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:submision_ahmadmuji/models/food.dart';
 import 'package:submision_ahmadmuji/ui/pages/detail_screen.dart';
+import 'package:submision_ahmadmuji/ui/style/style.dart';
 
 class FoodCardX extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: ScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        final Food food = foodList[index];
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DetailScreen(
-                food: food,
-              );
-            }));
-          },
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            margin: EdgeInsets.only(
-              right: 8,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  spreadRadius: 0.6,
-                  blurRadius: 0.6,
-                  blurStyle: BlurStyle.outer,
-                )
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    food.imageAsset,
-                    width: 150,
-                    height: 100,
-                    fit: BoxFit.cover,
+    return Container(
+      margin: EdgeInsets.only(top: 8, bottom: 8),
+      width: double.infinity,
+      height: 170,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: foodList.length,
+        itemBuilder: (context, index) {
+          Food food = foodList[index];
+          return GestureDetector(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(food: food),
+                )),
+            child: Container(
+              padding: EdgeInsets.all(8),
+              width: 166,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1,
+                      spreadRadius: 1,
+                      color: Colors.black.withOpacity(0.2),
+                    )
+                  ]),
+              margin: EdgeInsets.only(right: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      food.imageAsset,
+                      height: 100,
+                      width: 166,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  food.name,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
+                  Text(
+                    food.name,
+                    style: fontStylefoodnamea,
                   ),
-                ),
-                Image.asset(
-                  'images/stars_4.7.png',
-                ),
-              ],
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    food.foodPrice,
+                    style: fontStylefoodprice,
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-      },
-      itemCount: foodList.length,
+          );
+        },
+      ),
     );
   }
 }
